@@ -10,6 +10,9 @@ import {structureTool} from 'sanity/structure'
 import {apiVersion, dataset, projectId} from './sanity/env'
 import {schema} from './sanity/schema'
 
+import { presentationTool } from 'sanity/presentation'
+import { locate } from '@/sanity/presentation/locate'
+
 export default defineConfig({
   basePath: '/studio',
   projectId,
@@ -21,5 +24,13 @@ export default defineConfig({
     // Vision is a tool that lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({defaultApiVersion: apiVersion}),
+    presentationTool({
+      locate, // Used to show location of post
+      previewUrl: {
+        draftMode: {
+          enable: '/api/draft',
+        },
+      },
+    }),
   ],
 })
